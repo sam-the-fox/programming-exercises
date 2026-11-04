@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 40px auto;
+        max-width: 650px;
+      }
+      input[type="text"] {
+        margin: 5px 0;
+      }
+    </style>
+    <title>Bits to bytes</title>
+  </head>
+  <body>
+    <h1>Bits to bytes converter</h1>
+    <p><small><em>Dividing by 8 has never been so easy!</em></small></p>
+    <p>
+      <input type="text" id="bytes" placeholder="Bytes" />
+      <button onclick="onClickBytes()">Convert to bits</button>
+      <span id="remainder"></span>
+      <br />
+      <input type="text" id="bits" placeholder="Bits" />
+      <button onclick="onClickBits()">Convert to bytes</button>
+    </p>
+    <p id="error"></p>
+
+    <script>
+      /**
+       * @type {HTMLInputElement}
+       */
+      const bytesInput = document.getElementById("bytes");
+      /**
+       * @type {HTMLInputElement}
+       */
+      const bitsInput = document.getElementById("bits");
+      /**
+       * @type {HTMLParagraphElement}
+       */
+      const errorElement = document.getElementById("error");
+      /**
+       * @type {HTMLSpanElement}
+       */
+      const remElement = document.getElementById("remainder");
+
+      function onClickBytes() {
+        const bytes = parseInt(bytesInput.value.replaceAll(",", ""));
+        if (Number.isNaN(bytes)) {
+          errorElement.innerHTML = "Error: bytes input is not an integer!";
+          return;
+        }
+
+        bytesInput.value = bytes.toLocaleString("en-US");
+        bitsInput.value = (bytes * 8).toLocaleString("en-US");
+        errorElement.innerHTML = "";
+        remElement.innerHTML = "";
+      }
+
+      function onClickBits() {
+        const bits = parseInt(bitsInput.value.replaceAll(",", ""));
+        if (Number.isNaN(bits)) {
+          errorElement.innerHTML = "Error: bits input is not an integer!";
+          return;
+        }
+
+        const bytes = Math.ceil(bits / 8);
+        const remainder = bits % 8;
+
+        bitsInput.value = bits.toLocaleString("en-US");
+        bytesInput.value = bytes.toLocaleString("en-US");
+        errorElement.innerHTML = "";
+
+        if (remainder !== 0) {
+          const remainderBytes = (bytes - 1).toLocaleString("en-US");
+          remElement.innerHTML = `${remainderBytes} bytes plus ${remainder} bit${remainder === 1 ? "" : "s"}`;
+        } else {
+          remElement.innerHTML = "";
+        }
+      }
+    </script>
+  </body>
+</html>
