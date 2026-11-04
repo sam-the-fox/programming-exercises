@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>status monitor</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 40px auto;
+        max-width: 650px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>silly little status monitor</h1>
+    <p>
+      <small>
+        <em>Guaranteed <del>not</del> to get your IP rate limited!</em>
+      </small>
+    </p>
+    <table>
+      <tr>
+        <th>Service</th>
+        <th>Up?</th>
+        <th>Latency (ms)</th>
+      </tr>
+      {% for service in services %}
+      <tr>
+        <td>{{service.name}}</td>
+        <td>{% if service.up %}up{% else %}down{% endif %}</td>
+        <td>{% if service.up %}{{service.latency_ms}}ms{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
