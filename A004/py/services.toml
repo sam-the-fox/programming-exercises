@@ -1,7 +1,0 @@
-[[services]]
-name = "pronouns.cc"
-url = "https://pronouns.cc/api/v1/meta"
-
-[[services]]
-name = "Lodestone"
-url = "https://eu.finalfantasyxiv.com/lodestone"

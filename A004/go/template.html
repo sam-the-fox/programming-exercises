@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>status monitor</title>
+		<style>
+			body {
+				font-family: sans-serif;
+				margin: 40px auto;
+				max-width: 650px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>silly little status monitor</h1>
+		<p>
+			<small>
+				<em>Guaranteed <del>not</del> to get your IP rate limited!</em>
+			</small>
+		</p>
+		<table>
+			<tr>
+				<th>Service</th>
+				<th>Up?</th>
+				<th>Latency (ms)</th>
+			</tr>
+            {{range .Services}}
+            <tr>
+                <td>{{.Name}}</td>
+                <td>{{if .Up}}up{{else}}down{{end}}</td>
+                <td>{{if .Up}}{{.Latency}}{{end}}</td>
+            </tr>
+            {{end}}
+		</table>
+	</body>
+</html>

@@ -1,7 +1,7 @@
+import json
 import math
 import threading
 import time
-import tomllib
 
 import requests
 
@@ -25,8 +25,8 @@ class Services(threading.Thread):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        with open("services.toml", "r") as f:
-            config = tomllib.loads(f.read())
+        with open("../services.json", "r") as f:
+            config = json.loads(f.read())
             for service in config["services"]:
                 Services.all.append(Service(service["name"], service["url"]))
 
